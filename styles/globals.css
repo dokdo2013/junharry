@@ -21,7 +21,7 @@ a {
   font-family: 'PyeongChangPeace-Light';
 }
 
-.font-is {
+.font-is, .ant-collapse-header-text, .ant-tabs-tab-btn {
   font-family: 'InfinitySans-RegularA1';
 }
 
