@@ -31,6 +31,7 @@ export default function Home() {
   const [youtube, setYoutube] = useState([]);
   const [notice, setNotice] = useState([]);
   const [game, setGame] = useState("loading");
+  const [currentCalendarValue, setCurrentCalendarValue] = useState(moment());
 
   const url = "https://api-v1.leaven.team/junharry";
   let cnt = 0;
@@ -141,6 +142,7 @@ export default function Home() {
         setTodaySchedule([item]);
       }
     });
+    setCurrentCalendarValue(moment());
   }, [schedule]);
 
   return (
@@ -326,7 +328,7 @@ export default function Home() {
                 >
                   <Calendar
                     dateCellRender={dateCellRender}
-                    defaultValue={moment()}
+                    defaultValue={currentCalendarValue}
                     // monthCellRender={monthCellRender}
                   />
                 </div>
