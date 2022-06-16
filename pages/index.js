@@ -23,6 +23,8 @@ const { TabPane } = Tabs;
 const { Meta } = Card;
 const { Panel } = Collapse;
 
+moment.locale("ko");
+
 export default function Home() {
   const [schedule, setSchedule] = useState([]);
   const [todaySchedule, setTodaySchedule] = useState([]);
