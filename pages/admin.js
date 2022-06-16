@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 import moment from "moment";
 
-export default function admin() {
+export default function Admin() {
   // 일정 관리
   const [scheduleDate, setScheduleDate] = useState(
     moment().hour(19).minute(0).second(0).format("YYYY-MM-DD[T]HH:mm:ss")
