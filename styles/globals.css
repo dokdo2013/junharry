@@ -18,11 +18,15 @@ a {
 }
 
 .font-pc {
-  font-family: 'PyeongChangPeace-Light';
+  font-family: 'PyeongChangPeace-Light' !important;
 }
 
 .font-is, .ant-collapse-header-text, .ant-tabs-tab-btn {
-  font-family: 'InfinitySans-RegularA1';
+  font-family: 'InfinitySans-RegularA1' !important;
+}
+
+.admin {
+  font-family: 'InfinitySans-RegularA1' !important;
 }
 
 .flex-center {
@@ -62,8 +66,17 @@ a {
   color: white !important;
 }
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: #3553b2 !important
+  color: #3553b2 !important;
 }
 .ant-tabs-ink-bar {
-  background: #3553b2 !important
+  background: #3553b2 !important;
+}
+
+.ant-btn.ant-btn-background-ghost:hover, .ant-btn.ant-btn-background-ghost:focus {
+  color: yellow !important;
+  border-color: yellow !important;
+}
+
+.ant-picker-calendar-header {
+  background-color: #5DA3C2;
 }

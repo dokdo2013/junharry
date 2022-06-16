@@ -107,8 +107,14 @@ export default function Home() {
           <li key={item.name}>
             <Badge
               status={item.is_rest === 0 ? "success" : "error"}
-              text={item.name}
+              text={
+                item.is_rest === 0
+                  ? moment(item.date).format("A HH:mm")
+                  : "휴방"
+              }
             />
+            <br />
+            {item.name}
           </li>
         ))}
       </ul>
@@ -318,6 +324,7 @@ export default function Home() {
                 >
                   <Calendar
                     dateCellRender={dateCellRender}
+                    defaultValue={moment()}
                     // monthCellRender={monthCellRender}
                   />
                 </div>
@@ -338,7 +345,14 @@ export default function Home() {
                           key={item.idx}
                           class="font-is"
                         >
-                          <p className="font-is">{item.content}</p>
+                          {item.content.split("\\n").map((itemInner) => {
+                            console.log(itemInner);
+                            return (
+                              <p className="font-is" key={cnt++ + 99}>
+                                {itemInner.length === 0 ? "" : itemInner}
+                              </p>
+                            );
+                          })}
                           <p
                             className="font-is"
                             style={{ fontSize: "12px", color: "grey" }}
@@ -386,7 +400,7 @@ export default function Home() {
                     }}
                     ghost
                   >
-                    + 더 보기
+                    + 게임 추천하기
                   </Button>
                 </div>
               </TabPane>
