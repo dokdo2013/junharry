@@ -20,7 +20,7 @@ import Youtube from "./Pages/Youtube";
 import LinkPage from "./Pages/Link";
 
 export default function Admin() {
-  const apiUrl = "http://localhost:9091";
+  const apiUrl = "https://api-v1.leaven.team";
   const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("junharry-token")) {

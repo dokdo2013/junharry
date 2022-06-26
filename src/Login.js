@@ -21,7 +21,7 @@ export default function Login() {
 
   const loginProcess = () => {
     axios
-      .post("http://localhost:9091/junharry/token", {
+      .post("https://api-v1.leaven.team/junharry/token", {
         user_id: userId,
         user_pw: userPw,
       })
