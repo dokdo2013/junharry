@@ -16,6 +16,7 @@ import { IoIosCafe } from "react-icons/io";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+import Iframe from "react-iframe";
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -164,7 +165,7 @@ export default function Main() {
         <div
           style={{
             width: "100%",
-            height: 300,
+            height: isLive ? 580 : 300,
             backgroundColor: "white",
             display: "flex",
             flexDirection: "column",
@@ -201,6 +202,17 @@ export default function Main() {
               전해리 방송일정
             </h1>
           )}
+          {isLive && (
+            <Iframe
+              src="https://player.twitch.tv/?channel=gofl2237&parent=localhost"
+              frameborder="0"
+              allowfullscreen="true"
+              scrolling="no"
+              height="270"
+              width="480"
+            ></Iframe>
+          )}
+          <br />
           <div className="button-group" style={{ display: "flex !important" }}>
             <Tooltip title="트위치">
               <Button
@@ -401,7 +413,12 @@ export default function Main() {
               </TabPane>
               <TabPane tab="플레이 할 게임" key="3">
                 <div style={{ textAlign: "center", margin: "10px 0 20px 0" }}>
-                  <p>
+                  <div
+                    className="font-is"
+                    dangerouslySetInnerHTML={{ __html: game }}
+                  ></div>
+                  <br />
+                  {/* <p>
                     {game.split("\n").map((item) => {
                       return (
                         <p
@@ -413,7 +430,7 @@ export default function Main() {
                         </p>
                       );
                     })}
-                  </p>
+                  </p> */}
                   <Button
                     onClick={() => {
                       window.open(

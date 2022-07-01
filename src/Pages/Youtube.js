@@ -1,29 +1,55 @@
 import {
+  Heading,
+  Input,
+  Button,
+  Box,
   Alert,
   AlertIcon,
-  AlertTitle,
-  AlertDescription,
+  Text,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
 } from "@chakra-ui/react";
 
-export default function Youtube() {
+export default function Youtube({ apiUrl }) {
   return (
-    <Alert
-      status="info"
-      variant="subtle"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-      textAlign="center"
-      height="200px"
-      mt={5}
-    >
-      <AlertIcon boxSize="40px" mr={0} />
-      <AlertTitle mt={4} mb={1} fontSize="lg">
-        현재 준비 중인 메뉴입니다
-      </AlertTitle>
-      <AlertDescription maxWidth="sm">
-        곧 개발이 완료될 예정이에요. 조금만 더 기다려주세요!
-      </AlertDescription>
-    </Alert>
+    <>
+      <Alert status="info">
+        <AlertIcon />
+        입력창 3개 순서대로
+        <Text fontWeight="bold" mx={1}>
+          제목 - 유튜브 링크 - 썸네일 링크
+        </Text>
+        입니다.
+      </Alert>
+
+      <Heading className="font-is" size="md" mt={6} mb={3}>
+        유튜브 1
+      </Heading>
+      <Input type="text" mb={1} placeholder="제목을 입력해주세요" />
+      <Input type="text" mb={1} placeholder="유튜브 링크를 입력해주세요" />
+      <Input type="text" mb={1} placeholder="썸네일 링크를 입력해주세요" />
+
+      <Heading className="font-is" size="md" mt={6} mb={3}>
+        유튜브 2
+      </Heading>
+      <Input type="text" mb={1} placeholder="제목을 입력해주세요" />
+      <Input type="text" mb={1} placeholder="유튜브 링크를 입력해주세요" />
+      <Input type="text" mb={1} placeholder="썸네일 링크를 입력해주세요" />
+
+      <Heading className="font-is" size="md" mt={6} mb={3}>
+        유튜브 3
+      </Heading>
+      <Input type="text" mb={1} placeholder="제목을 입력해주세요" />
+      <Input type="text" mb={1} placeholder="유튜브 링크를 입력해주세요" />
+      <Input type="text" mb={1} placeholder="썸네일 링크를 입력해주세요" />
+
+      <Box style={{ textAlign: "right" }} mt={2}>
+        <Button colorScheme="blue">등록</Button>
+      </Box>
+    </>
   );
 }
