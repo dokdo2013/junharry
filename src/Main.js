@@ -204,7 +204,7 @@ export default function Main() {
           )}
           {isLive && (
             <Iframe
-              src="https://player.twitch.tv/?channel=gofl2237&parent=localhost"
+              src="https://player.twitch.tv/?channel=gofl2237&parent=junharry.vercel.app"
               frameborder="0"
               allowfullscreen="true"
               scrolling="no"
