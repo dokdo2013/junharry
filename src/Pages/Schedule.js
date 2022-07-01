@@ -4,6 +4,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Box,
   FormHelperText,
   Flex,
   Checkbox,
@@ -15,6 +16,7 @@ import {
   Th,
   Td,
   Badge,
+  IconButton,
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogBody,
@@ -23,6 +25,7 @@ import {
   AlertDialogFooter,
   useDisclosure,
 } from "@chakra-ui/react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import moment from "moment";
 import { useState, useEffect } from "react";
@@ -38,6 +41,14 @@ export default function Schedule({ apiUrl }) {
   const [alertDate, setAlertDate] = useState("");
   const [alertName, setAlertName] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selectYear, setSelectYear] = useState(moment().format("YYYY-MM"));
+
+  const yearMinus = () => {
+    setSelectYear(moment(selectYear).subtract(1, "months").format("YYYY-MM"));
+  };
+  const yearPlus = () => {
+    setSelectYear(moment(selectYear).add(1, "months").format("YYYY-MM"));
+  };
 
   const apiSetSchedule = () => {
     axios
@@ -181,6 +192,37 @@ export default function Schedule({ apiUrl }) {
       </Flex>
       <Heading className="font-is" size="md" mt={5} mb={5}>
         일정 조회
+        <Box ml={4} style={{ display: "inline-flex" }}>
+          <IconButton
+            size="sm"
+            mr={0}
+            icon={<ChevronLeftIcon />}
+            onClick={yearMinus}
+            style={{
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+            }}
+          />
+          <Input
+            type="month"
+            w={120}
+            size="sm"
+            value={selectYear}
+            onChange={(e) => {
+              setSelectYear(e.target.value);
+            }}
+          />
+          <IconButton
+            size="sm"
+            mr={0}
+            icon={<ChevronRightIcon />}
+            onClick={yearPlus}
+            style={{
+              borderTopLeftRadius: 0,
+              borderBottomLeftRadius: 0,
+            }}
+          />
+        </Box>
       </Heading>
       <Table size="sm" id="schedule-table">
         <Thead>
@@ -195,39 +237,40 @@ export default function Schedule({ apiUrl }) {
           {scheduleList.map((item) => {
             const day = moment(item.date).isoWeekday();
             const yoil = ["월", "화", "수", "목", "금", "토", "일"];
-            return (
-              <Tr
-                key={item.idx}
-                style={
-                  day === 6 || day === 7
-                    ? { backgroundColor: "rgba(0,0,0,0.05)" }
-                    : {}
-                }
-              >
-                <Td>
-                  {item.is_rest === 1 ? (
-                    <Badge colorScheme="red">휴방</Badge>
-                  ) : (
-                    <Badge colorScheme="green">생방</Badge>
-                  )}
-                </Td>
-                <Td>
-                  {item.date} ({yoil[day - 1]})
-                </Td>
-                <Td>{item.name}</Td>
-                <Td>
-                  <Button
-                    colorScheme="red"
-                    size="xs"
-                    onClick={() =>
-                      deleteConfirm(item.idx, item.date, item.name)
-                    }
-                  >
-                    삭제
-                  </Button>
-                </Td>
-              </Tr>
-            );
+            if (moment(item.date).format("YYYY-MM") === selectYear)
+              return (
+                <Tr
+                  key={item.idx}
+                  style={
+                    day === 6 || day === 7
+                      ? { backgroundColor: "rgba(0,0,0,0.05)" }
+                      : {}
+                  }
+                >
+                  <Td>
+                    {item.is_rest === 1 ? (
+                      <Badge colorScheme="red">휴방</Badge>
+                    ) : (
+                      <Badge colorScheme="green">생방</Badge>
+                    )}
+                  </Td>
+                  <Td>
+                    {item.date} ({yoil[day - 1]})
+                  </Td>
+                  <Td>{item.name}</Td>
+                  <Td>
+                    <Button
+                      colorScheme="red"
+                      size="xs"
+                      onClick={() =>
+                        deleteConfirm(item.idx, item.date, item.name)
+                      }
+                    >
+                      삭제
+                    </Button>
+                  </Td>
+                </Tr>
+              );
           })}
         </Tbody>
       </Table>

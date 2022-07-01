@@ -479,7 +479,7 @@ export default function Main() {
           >
             {youtube.map((item) => {
               return (
-                <Col span={8} style={{ padding: "10px" }} key={item.idx}>
+                <Col xs={24} md={8} style={{ padding: "10px" }} key={item.idx}>
                   <Card
                     hoverable
                     style={{ width: "100%" }}
