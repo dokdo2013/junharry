@@ -97,3 +97,25 @@ a {
 #youtube-table > tbody > tr:nth-child(1), #youtube-table > tbody > tr:nth-child(2), #youtube-table > tbody > tr:nth-child(3) {
   background-color: rgba(0,0,0,0.05) !important;
 }
+
+.ant-picker-calendar-mode-switch {
+  display: none;
+}
+.ant-picker-calendar-header {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.site-calendar-demo-card {
+  width: 100%;
+}
+
+.ant-picker-calendar-date-content {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+}
+
+.ant-badge-status-dot {
+  width: 10px;
+  height: 10px;
+}

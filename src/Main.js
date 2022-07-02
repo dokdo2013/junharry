@@ -1,5 +1,6 @@
 import "./App.css";
 import {
+  Alert,
   Avatar,
   Button,
   Tooltip,
@@ -17,6 +18,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import Iframe from "react-iframe";
+import MediaQuery from "react-responsive";
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -33,8 +35,36 @@ export default function Main() {
   const [isLive, setIsLive] = useState(false);
   const [currentCalendarValue, setCurrentCalendarValue] = useState(moment());
 
+  const [calendarSelectedValue, setCalendarSelectedValue] = useState(moment());
+  const [mobileCalendarType, setMobileCalendarType] = useState("success");
+  const [mobileCalendarTitle, setMobileCalendarTitle] = useState("");
+  const [mobileCalendarContent, setMobileCalendarContent] = useState("");
+
   const url = "https://api-v1.leaven.team/junharry";
   let cnt = 0;
+
+  // 모바일 캘린더 처리
+  const calendarMobileClick = (date) => {
+    const currentDate = date.format("YYYY-MM-DD");
+    let count = 0;
+    schedule.map((item) => {
+      if (item.date.indexOf(currentDate) !== -1) {
+        if (item.is_rest) {
+          setMobileCalendarType("error");
+        } else {
+          setMobileCalendarType("success");
+        }
+        setMobileCalendarTitle(item.name);
+        setMobileCalendarContent(item.date);
+        count++;
+      }
+    });
+    if (count === 0) {
+      setMobileCalendarType("info");
+      setMobileCalendarTitle("일정이 등록되지 않았습니다");
+      setMobileCalendarContent(currentDate);
+    }
+  };
 
   // 라이브 여부 조회
   const getLive = () => {
@@ -115,7 +145,6 @@ export default function Main() {
   };
 
   const dateCellRender = (value) => {
-    // alert(value);
     const listData = getListData(value);
     return (
       <ul className="events" style={{ listStyle: "none", padding: 0 }}>
@@ -134,6 +163,20 @@ export default function Main() {
           </li>
         ))}
       </ul>
+    );
+  };
+
+  const dateCellRenderMobile = (value) => {
+    const listData = getListData(value);
+    return (
+      <>
+        {listData.map((item) => (
+          <Badge
+            key={item.name}
+            status={item.is_rest === 0 ? "success" : "error"}
+          />
+        ))}
+      </>
     );
   };
 
@@ -359,11 +402,32 @@ export default function Main() {
                     margin: "0 auto",
                   }}
                 >
-                  <Calendar
-                    dateCellRender={dateCellRender}
-                    defaultValue={currentCalendarValue}
-                    // monthCellRender={monthCellRender}
-                  />
+                  <MediaQuery maxWidth={767}>
+                    <div
+                      className="site-calendar-demo-card"
+                      style={{ marginBottom: "12px" }}
+                    >
+                      <Calendar
+                        mode="month"
+                        fullscreen={false}
+                        dateCellRender={dateCellRenderMobile}
+                        defaultValue={currentCalendarValue}
+                        onSelect={calendarMobileClick}
+                      />
+                    </div>
+                    <Alert
+                      message={mobileCalendarTitle}
+                      description={mobileCalendarContent}
+                      type={mobileCalendarType}
+                    />
+                  </MediaQuery>
+                  <MediaQuery minWidth={768}>
+                    <Calendar
+                      mode="month"
+                      dateCellRender={dateCellRender}
+                      defaultValue={currentCalendarValue}
+                    />
+                  </MediaQuery>
                 </div>
               </TabPane>
               <TabPane tab="공지사항" key="2">

@@ -115,13 +115,36 @@ export default function Schedule({ apiUrl, toast }) {
       })
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
-          alert("삭제 성공!");
+          toast({
+            title: "성공",
+            description: Response.data.message,
+            position: "top-right",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
           apiGetSchedule();
           onClose();
+        } else {
+          toast({
+            title: "실패",
+            description: Response.data.message,
+            position: "top-right",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       })
       .catch((Response) => {
-        alert(Response.response.data.message);
+        toast({
+          title: "실패",
+          description: Response.response.data.message,
+          position: "top-right",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       });
   };
 
