@@ -44,8 +44,7 @@ export default function Main() {
         if (tempData.indexOf("gofl2237") !== -1) {
           setIsLive(true);
         } else {
-          setIsLive(true);
-          // setIsLive(false);
+          setIsLive(false);
         }
       }
     });
