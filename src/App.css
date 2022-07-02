@@ -84,3 +84,12 @@ a {
 #schedule-table th, #schedule-table td {
   text-align: center;
 }
+
+#iframe-container {
+  width: 100vw !important;
+  overflow: hidden !important;
+}
+
+#youtube-table > tbody > tr:nth-child(1), #youtube-table > tbody > tr:nth-child(2), #youtube-table > tbody > tr:nth-child(3) {
+  background-color: rgba(0,0,0,0.05) !important;
+}

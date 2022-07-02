@@ -30,7 +30,7 @@ import axios from "axios";
 import moment from "moment";
 import { useState, useEffect } from "react";
 
-export default function Schedule({ apiUrl }) {
+export default function Schedule({ apiUrl, toast }) {
   const [scheduleDate, setScheduleDate] = useState(
     moment().hour(19).minute(0).second(0).format("YYYY-MM-DD[T]HH:mm:ss")
   );
@@ -67,24 +67,42 @@ export default function Schedule({ apiUrl }) {
       )
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
-          alert("등록 성공!");
+          toast({
+            title: "성공",
+            description: Response.data.message,
+            position: "top-right",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
           apiGetSchedule();
-          setScheduleIsRest(false);
           setScheduleName("");
         } else {
-          alert(Response.data.message);
-          console.log(Response.data.message);
+          toast({
+            title: "실패",
+            description: Response.data.message,
+            position: "top-right",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       })
       .catch((Response) => {
-        alert(Response.response.data.message);
+        toast({
+          title: "실패",
+          description: Response.response.data.message,
+          position: "top-right",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       });
   };
   const apiGetSchedule = () => {
     axios.get(apiUrl + "/junharry/schedule").then((Response) => {
       if (Response.data.code === "SUCCESS") {
         setScheduleList(Response.data.data);
-        console.log(Response.data.data);
       }
     });
   };
@@ -147,7 +165,7 @@ export default function Schedule({ apiUrl }) {
         </AlertDialogOverlay>
       </AlertDialog>
       <Heading className="font-is" size="md" mt={3}>
-        일정 추가
+        일정 등록
       </Heading>
       <SimpleGrid columns={2} spacing={2} mt={4}>
         <FormControl>
@@ -236,6 +254,7 @@ export default function Schedule({ apiUrl }) {
         <Tbody>
           {scheduleList.map((item) => {
             const day = moment(item.date).isoWeekday();
+            const formatDate = moment(item.date).format("YYYY-MM-DD HH:mm");
             const yoil = ["월", "화", "수", "목", "금", "토", "일"];
             if (moment(item.date).format("YYYY-MM") === selectYear)
               return (
@@ -255,7 +274,7 @@ export default function Schedule({ apiUrl }) {
                     )}
                   </Td>
                   <Td>
-                    {item.date} ({yoil[day - 1]})
+                    {formatDate} ({yoil[day - 1]})
                   </Td>
                   <Td>{item.name}</Td>
                   <Td>

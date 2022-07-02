@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {
+  useToast,
   ChakraProvider,
   Heading,
   Container,
@@ -20,7 +21,9 @@ import Youtube from "./Pages/Youtube";
 import LinkPage from "./Pages/Link";
 
 export default function Admin() {
-  const apiUrl = "https://api-v1.leaven.team";
+  const toast = useToast();
+  // const apiUrl = "https://api-v1.leaven.team";
+  const apiUrl = "http://localhost:9091";
   const [isLogin, setIsLogin] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("junharry-token")) {
@@ -66,7 +69,7 @@ export default function Admin() {
                 </Flex>
                 <Box mt={5}>
                   <Tabs variant="soft-rounded" colorScheme="blue">
-                    <TabList>
+                    <TabList flexWrap="wrap">
                       <Tab>일정 관리</Tab>
                       <Tab>공지사항 관리</Tab>
                       <Tab>게임 관리</Tab>
@@ -75,16 +78,16 @@ export default function Admin() {
                     </TabList>
                     <TabPanels>
                       <TabPanel>
-                        <Schedule apiUrl={apiUrl} />
+                        <Schedule apiUrl={apiUrl} toast={toast} />
                       </TabPanel>
                       <TabPanel>
-                        <Notice apiUrl={apiUrl} />
+                        <Notice apiUrl={apiUrl} toast={toast} />
                       </TabPanel>
                       <TabPanel>
-                        <Game apiUrl={apiUrl} />
+                        <Game apiUrl={apiUrl} toast={toast} />
                       </TabPanel>
                       <TabPanel>
-                        <Youtube apiUrl={apiUrl} />
+                        <Youtube apiUrl={apiUrl} toast={toast} />
                       </TabPanel>
                       {/* <TabPanel>
                       <LinkPage apiUrl={apiUrl} />

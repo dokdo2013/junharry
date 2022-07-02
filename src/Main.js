@@ -44,7 +44,8 @@ export default function Main() {
         if (tempData.indexOf("gofl2237") !== -1) {
           setIsLive(true);
         } else {
-          setIsLive(false);
+          setIsLive(true);
+          // setIsLive(false);
         }
       }
     });
@@ -203,14 +204,16 @@ export default function Main() {
             </h1>
           )}
           {isLive && (
-            <Iframe
-              src="https://player.twitch.tv/?channel=gofl2237&parent=junharry.vercel.app"
-              frameborder="0"
-              allowfullscreen="true"
-              scrolling="no"
-              height="270"
-              width="480"
-            ></Iframe>
+            <div id="iframe-container">
+              <Iframe
+                src="https://player.twitch.tv/?channel=gofl2237&parent=junharry.vercel.app"
+                frameborder="0"
+                allowfullscreen="true"
+                scrolling="no"
+                height="270"
+                width="480"
+              ></Iframe>
+            </div>
           )}
           <br />
           <div className="button-group" style={{ display: "flex !important" }}>
@@ -380,13 +383,16 @@ export default function Main() {
                           key={item.idx}
                           class="font-is"
                         >
-                          {item.content.split("\\n").map((itemInner) => {
+                          <div
+                            dangerouslySetInnerHTML={{ __html: item.content }}
+                          ></div>
+                          {/* {item.content.split("\\n").map((itemInner) => {
                             return (
                               <p className="font-is" key={cnt++ + 99}>
                                 {itemInner.length === 0 ? "" : itemInner}
                               </p>
                             );
-                          })}
+                          })} */}
                           <p
                             className="font-is"
                             style={{ fontSize: "12px", color: "grey" }}

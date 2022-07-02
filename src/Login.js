@@ -1,5 +1,6 @@
 import "./App.css";
 import {
+  useToast,
   Flex,
   Box,
   FormControl,
@@ -16,6 +17,7 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Login() {
+  const toast = useToast();
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
 
@@ -30,11 +32,25 @@ export default function Login() {
           localStorage.setItem("junharry-token", Response.data.data.token);
           window.location.href = "/admin";
         } else {
-          alert(Response.data.message);
+          toast({
+            title: "로그인 실패",
+            description: Response.data.message,
+            position: "top-right",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
         }
       })
       .catch((Response) => {
-        alert(Response.response.data.message);
+        toast({
+          title: "로그인 실패",
+          description: Response.response.data.message,
+          position: "top-right",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       });
   };
 
