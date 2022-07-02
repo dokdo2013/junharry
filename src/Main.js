@@ -200,6 +200,7 @@ export default function Main() {
       }
     });
     setCurrentCalendarValue(moment());
+    calendarMobileClick(calendarSelectedValue);
   }, [schedule]);
 
   return (
