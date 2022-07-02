@@ -318,7 +318,7 @@ export default function Youtube({ apiUrl, toast }) {
       </Box>
 
       <Heading className="font-is" size="md" mt={6} mb={3}>
-        유튜브 목록
+        유튜브 조회
       </Heading>
       <Table id="youtube-table">
         <Thead>
