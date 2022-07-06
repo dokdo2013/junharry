@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import axios from "axios";
+import amplitude from "amplitude-js";
 
 export default function Login() {
   const toast = useToast();
@@ -30,6 +31,7 @@ export default function Login() {
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
           localStorage.setItem("junharry-token", Response.data.data.token);
+          amplitude.getInstance().logEvent("EVENT_NAME_HERE");
           window.location.href = "/admin";
         } else {
           toast({
