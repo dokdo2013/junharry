@@ -42,6 +42,8 @@ const HarryTest = ({ apiUrl, toast }) => {
   const [isFollow, setIsFollow] = useState(false);
   const [followDate, setFollowDate] = useState("");
   const [isSub, setIsSub] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [targetIdx, setTargetIdx] = useState(0);
 
   const popUser = [188643459, 789278221, 798123164, 178323155, 726441337];
 
@@ -89,8 +91,8 @@ const HarryTest = ({ apiUrl, toast }) => {
       });
   };
 
-  const getFollows = (id) => {
-    axios
+  const getFollows = async (id) => {
+    await axios
       .get(apiUrl + `/junharry/follow/${id}`, {
         headers: {
           "X-Access-Token": localStorage.getItem("junharry-token"),
@@ -107,8 +109,8 @@ const HarryTest = ({ apiUrl, toast }) => {
       });
   };
 
-  const getSub = (id) => {
-    axios
+  const getSub = async (id) => {
+    await axios
       .get(apiUrl + `/junharry/subscribe/${id}`, {
         headers: {
           "X-Access-Token": localStorage.getItem("junharry-token"),
@@ -314,12 +316,27 @@ const HarryTest = ({ apiUrl, toast }) => {
                 <Td>
                   <Button
                     size="sm"
-                    onClick={() => {
+                    isLoading={isLoading && idx === targetIdx}
+                    onClick={async () => {
+                      setTargetIdx(idx);
+                      setIsLoading(true);
                       setFollowDate("");
-                      getFollows(data.user.user_id);
-                      getSub(data.user.user_id);
+                      setIsFollow(false);
+                      setIsSub(false);
+                      try {
+                        await getFollows(data.user.user_id);
+                      } catch (e) {
+                        setIsFollow(false);
+                        setFollowDate("");
+                      }
+                      try {
+                        await getSub(data.user.user_id);
+                      } catch (e) {
+                        setIsSub(false);
+                      }
                       setDrawerUser(data.user);
                       onOpen1();
+                      setIsLoading(false);
                     }}
                   >
                     유저상세
