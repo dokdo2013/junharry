@@ -96,7 +96,7 @@ const HarryTest = ({ apiUrl, toast }) => {
       })
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
-          setDrawerResult(Response.data.data);
+          setDrawerResult(Response.data.data.result.test_data);
           onOpen2();
         } else {
           toast({
@@ -182,7 +182,7 @@ const HarryTest = ({ apiUrl, toast }) => {
 
           <DrawerBody>
             <Box>
-              {drawerResult.result.test_data.map((item, index) => {
+              {drawerResult.map((item, index) => {
                 return (
                   <Box key={index} my={5}>
                     <Heading size="sm">
