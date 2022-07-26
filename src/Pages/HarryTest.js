@@ -39,6 +39,9 @@ const HarryTest = ({ apiUrl, toast }) => {
 
   const [drawerUser, setDrawerUser] = useState([]);
   const [drawerResult, setDrawerResult] = useState([]);
+  const [isFollow, setIsFollow] = useState(false);
+  const [followDate, setFollowDate] = useState("");
+  const [isSub, setIsSub] = useState(false);
 
   const popUser = [188643459, 789278221, 798123164, 178323155, 726441337];
 
@@ -86,6 +89,34 @@ const HarryTest = ({ apiUrl, toast }) => {
       });
   };
 
+  const getFollows = (id) => {
+    axios
+      .get(apiUrl + `/junharry/follow/${id}`, {
+        headers: {
+          "X-Access-Token": localStorage.getItem("junharry-token"),
+        },
+      })
+      .then((Response) => {
+        if (Response.data.code === "SUCCESS") {
+          console.log(Response.data.data);
+        }
+      });
+  };
+
+  const getSub = (id) => {
+    axios
+      .get(apiUrl + `/junharry/subscribe/${id}`, {
+        headers: {
+          "X-Access-Token": localStorage.getItem("junharry-token"),
+        },
+      })
+      .then((Response) => {
+        if (Response.data.code === "SUCCESS") {
+          console.log(Response.data.data);
+        }
+      });
+  };
+
   const resultOpen = (user_idx) => {
     // 데이터 조회
     axios
@@ -97,6 +128,8 @@ const HarryTest = ({ apiUrl, toast }) => {
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
           setDrawerResult(Response.data.data.test_data);
+          getFollows(user_idx);
+          getSub(user_idx);
           onOpen2();
         } else {
           toast({
