@@ -18,7 +18,7 @@ import Schedule from "./Pages/Schedule";
 import Notice from "./Pages/Notice";
 import Game from "./Pages/Game";
 import Youtube from "./Pages/Youtube";
-import LinkPage from "./Pages/Link";
+import HarryTest from "./Pages/HarryTest";
 
 export default function Admin() {
   const toast = useToast();
@@ -74,6 +74,7 @@ export default function Admin() {
                       <Tab>공지사항 관리</Tab>
                       <Tab>게임 관리</Tab>
                       <Tab>유튜브 관리</Tab>
+                      <Tab>해리배치고사</Tab>
                       {/* <Tab>링크 관리</Tab> */}
                     </TabList>
                     <TabPanels>
@@ -88,6 +89,9 @@ export default function Admin() {
                       </TabPanel>
                       <TabPanel>
                         <Youtube apiUrl={apiUrl} toast={toast} />
+                      </TabPanel>
+                      <TabPanel>
+                        <HarryTest apiUrl={apiUrl} toast={toast} />
                       </TabPanel>
                       {/* <TabPanel>
                       <LinkPage apiUrl={apiUrl} />
