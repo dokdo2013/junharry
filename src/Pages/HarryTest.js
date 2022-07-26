@@ -96,7 +96,7 @@ const HarryTest = ({ apiUrl, toast }) => {
       })
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
-          setDrawerResult(Response.data.data.result.test_data);
+          setDrawerResult(Response.data.data.test_data);
           onOpen2();
         } else {
           toast({
