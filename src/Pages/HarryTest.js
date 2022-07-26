@@ -98,7 +98,11 @@ const HarryTest = ({ apiUrl, toast }) => {
       })
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
-          console.log(Response.data.data);
+          if (Response.data.data.total === 1) {
+            setIsFollow(true);
+            const followDate = Response.data.data.data[0].followed_at;
+            setFollowDate(followDate.replace("T", " ").replace("Z", ""));
+          }
         }
       });
   };
@@ -112,7 +116,9 @@ const HarryTest = ({ apiUrl, toast }) => {
       })
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
-          console.log(Response.data.data);
+          if (Response.data.data.data.length === 1) {
+            setIsSub(true);
+          }
         }
       });
   };
@@ -128,8 +134,6 @@ const HarryTest = ({ apiUrl, toast }) => {
       .then((Response) => {
         if (Response.data.code === "SUCCESS") {
           setDrawerResult(Response.data.data.test_data);
-          getFollows(user_idx);
-          getSub(user_idx);
           onOpen2();
         } else {
           toast({
@@ -194,6 +198,30 @@ const HarryTest = ({ apiUrl, toast }) => {
                 <Tr>
                   <Td fontWeight="bold">트위치 가입일</Td>
                   <Td>{drawerUser.user_created_at}</Td>
+                </Tr>
+                <Tr>
+                  <Td fontWeight="bold">전해리 팔로우 여부</Td>
+                  <Td>
+                    {isFollow ? (
+                      <Badge color="green">팔로우 O</Badge>
+                    ) : (
+                      <Badge color="red">팔로우 X</Badge>
+                    )}
+                  </Td>
+                </Tr>
+                <Tr>
+                  <Td fontWeight="bold">전해리 팔로우 일시</Td>
+                  <Td>{followDate}</Td>
+                </Tr>
+                <Tr>
+                  <Td fontWeight="bold">전해리 구독여부</Td>
+                  <Td>
+                    {isSub ? (
+                      <Badge color="green">구독 O</Badge>
+                    ) : (
+                      <Badge color="red">구독 X</Badge>
+                    )}
+                  </Td>
                 </Tr>
               </Tbody>
             </Table>
@@ -287,6 +315,9 @@ const HarryTest = ({ apiUrl, toast }) => {
                   <Button
                     size="sm"
                     onClick={() => {
+                      setFollowDate("");
+                      getFollows(data.user.user_id);
+                      getSub(data.user.user_id);
                       setDrawerUser(data.user);
                       onOpen1();
                     }}
