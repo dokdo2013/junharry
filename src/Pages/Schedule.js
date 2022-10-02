@@ -32,7 +32,7 @@ import { useState, useEffect } from "react";
 
 export default function Schedule({ apiUrl, toast }) {
   const [scheduleDate, setScheduleDate] = useState(
-    moment().hour(19).minute(0).second(0).format("YYYY-MM-DD[T]HH:mm:ss")
+    moment().hour(20).minute(0).second(0).format("YYYY-MM-DD[T]HH:mm:ss")
   );
   const [scheduleName, setScheduleName] = useState("");
   const [scheduleIsRest, setScheduleIsRest] = useState(false);
