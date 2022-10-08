@@ -2,7 +2,7 @@
 
 트위치 스트리머 [전해리](https://twitch.tv/gofl2237)의 방송일정과 각종 공지사항 등을 보여주는 웹사이트
 
-[https://junharry.vercel.app](https://junharry.vercel.app)
+[https://junharry.com](https://junharry.com)
 
 ## Tech Stack
 - Frontend : React.js(CRA), Ant Design, Chakra-UI
