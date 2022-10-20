@@ -8906,10 +8906,10 @@ react-icons@4.6.0:
   resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.6.0.tgz"
   integrity sha512-rR/L9m9340yO8yv1QT1QurxWQvWpbNHqVX0fzMln2HEb9TEIrQRGsqiNFQfiv9/JEUbyHmHPlNTB2LWm2Ttz0g==
 
-react-iframe@1.8.4:
-  version "1.8.4"
-  resolved "https://registry.npmjs.org/react-iframe/-/react-iframe-1.8.4.tgz"
-  integrity sha512-/yhhubhUBjcckJyPJ/83ZLitM81wAptVpgdBVx5+d8D7U/lyynZGgFjY0SQpfUYvMK8UEh5QvCGpH94O5ehQsA==
+react-iframe@1.8.5:
+  version "1.8.5"
+  resolved "https://registry.npmjs.org/react-iframe/-/react-iframe-1.8.5.tgz"
+  integrity sha512-F4cQJGs3ydaG6fJWfuz9yLwOU0Trzl6kttXuUG+vYwosH8enOOFxZWEDQCSbNVO8ayjfYZeqLxEvdvcsSy4GvA==
   dependencies:
     object-assign "^4.1.1"
 
