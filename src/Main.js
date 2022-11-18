@@ -288,7 +288,7 @@ export default function Main() {
           {isLive && (
             <div id="iframe-container">
               <Iframe
-                src="https://player.twitch.tv/?channel=gofl2237&parent=junharry.vercel.app"
+                src="https://player.twitch.tv/?channel=gofl2237&parent=junharry.vercel.app&parent=junharry.com"
                 frameborder="0"
                 allowfullscreen="true"
                 scrolling="no"
