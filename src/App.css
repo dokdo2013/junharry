@@ -120,3 +120,8 @@ a {
   height: 10px;
   z-index: 1000;
 }
+
+.ant-card-meta-title {
+  overflow: auto;
+  white-space: unset;
+}

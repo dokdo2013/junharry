@@ -11,14 +11,17 @@ import {
   Card,
   Row,
   Col,
+  List,
 } from "antd";
-import { FaTwitch, FaYoutube, FaInstagram, FaDiscord } from "react-icons/fa";
+import { LikeOutlined, CommentOutlined } from "@ant-design/icons";
+import { FaYoutube, FaInstagram } from "react-icons/fa";
 import { IoIosCafe } from "react-icons/io";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import Iframe from "react-iframe";
 import MediaQuery from "react-responsive";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 const { TabPane } = Tabs;
 const { Meta } = Card;
@@ -34,6 +37,9 @@ export default function Main() {
   const [game, setGame] = useState("loading");
   const [isLive, setIsLive] = useState(false);
   const [currentCalendarValue, setCurrentCalendarValue] = useState(moment());
+
+  const [afreeca, setAfreeca] = useState([]);
+  const [isAfreecaLoaded, setIsAfreecaLoaded] = useState(false);
 
   const [calendarSelectedValue, setCalendarSelectedValue] = useState(moment());
   const [mobileCalendarType, setMobileCalendarType] = useState("success");
@@ -78,6 +84,23 @@ export default function Main() {
         }
       }
     });
+  };
+
+  // 아프리카TV 공지사항 조회
+  const getAfreecaNotice = () => {
+    const url =
+      "https://bjapi.afreecatv.com/api/gofl2237/board/13296623?page=1&per_page=20&field=title%2Ccontents&keyword=&type=all&months=";
+    axios
+      .get(url)
+      .then((Response) => {
+        setAfreeca(Response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setIsAfreecaLoaded(true);
+      });
   };
 
   // 방송일정 조회
@@ -190,6 +213,7 @@ export default function Main() {
     getNoticeData();
     getGame();
     getLive();
+    getAfreecaNotice();
   }, []);
 
   useEffect(() => {
@@ -206,6 +230,22 @@ export default function Main() {
   return (
     <div>
       <main style={{}}>
+        <Alert
+          message="이제 아프리카TV에서 전해리 방송을 보실 수 있습니다!"
+          action={
+            <Button
+              size="small"
+              type="primary"
+              onClick={() => {
+                window.open("https://bj.afreecatv.com/gofl2237");
+              }}
+            >
+              아프리카TV로 이동
+            </Button>
+          }
+          type="info"
+          banner
+        />
         <div
           style={{
             width: "100%",
@@ -217,10 +257,9 @@ export default function Main() {
             alignItems: "center",
           }}
         >
-          <Avatar
-            size={100}
-            src="https://imagedelivery.net/lR-z0ff8FVe1ydEi9nc-5Q/c552441f-f764-4e67-cd3f-1621da181a00/500x500"
-          />
+          <div style={{ marginTop: 30 }}>
+            <Avatar size={100} src="gofl2237.jpeg" />
+          </div>
           {isLive ? (
             <Badge.Ribbon text="LIVE" color="red">
               <h1
@@ -260,7 +299,25 @@ export default function Main() {
           )}
           <br />
           <div className="button-group" style={{ display: "flex !important" }}>
-            <Tooltip title="트위치">
+            <Tooltip title="아프리카TV">
+              <Button
+                className="flex-center"
+                shape="circle"
+                icon={
+                  <img
+                    height={18}
+                    style={{ filter: "grayscale(100%)" }}
+                    src="https://obj-sg.thewiki.kr/data/ec9584ed9484eba6acecb9b4545620ec9584ec9db4ecbd982e706e67.png"
+                    alt="AfreecaTV"
+                  />
+                }
+                size="large"
+                onClick={() => {
+                  window.open("https://bj.afreecatv.com/gofl2237");
+                }}
+              ></Button>
+            </Tooltip>
+            {/* <Tooltip title="트위치">
               <Button
                 className="flex-center"
                 shape="circle"
@@ -270,7 +327,7 @@ export default function Main() {
                   window.open("https://twitch.tv/gofl2237");
                 }}
               ></Button>
-            </Tooltip>
+            </Tooltip> */}
             <Tooltip title="유튜브">
               <Button
                 className="flex-center"
@@ -295,7 +352,7 @@ export default function Main() {
                 }}
               ></Button>
             </Tooltip>
-            <Tooltip title="디스코드">
+            {/* <Tooltip title="디스코드">
               <Button
                 className="flex-center"
                 shape="circle"
@@ -305,7 +362,7 @@ export default function Main() {
                   window.open("https://discord.gg/FTWqeNRy2B");
                 }}
               ></Button>
-            </Tooltip>
+            </Tooltip> */}
             <Tooltip title="카페">
               <Button
                 className="flex-center"
@@ -360,7 +417,7 @@ export default function Main() {
           }}
         >
           <div>
-            <Tabs defaultActiveKey="1" centered>
+            <Tabs defaultActiveKey="1" centered style={{ display: "none" }}>
               <TabPane tab="방송일정" key="1">
                 <p
                   className="font-is"
@@ -514,6 +571,67 @@ export default function Main() {
                 </div>
               </TabPane>
             </Tabs>{" "}
+            {/* AFREECATV 방송일정 */}
+            {/* <Row
+              style={{
+                width: "100%",
+                maxWidth: "1200px",
+                margin: "0 auto",
+              }}
+            > */}
+            <ResponsiveMasonry
+              style={{ maxWidth: "1200px", margin: "0 auto" }}
+              columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+            >
+              <Masonry>
+                {isAfreecaLoaded &&
+                  afreeca.map((item) => {
+                    return (
+                      <a
+                        href={`https://bj.afreecatv.com/gofl2237/post/${item.title_no}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Card
+                          style={{ margin: "10px" }}
+                          cover={
+                            item.photos.length > 0 && (
+                              <img
+                                alt="cover"
+                                height={160}
+                                style={{ objectFit: "cover" }}
+                                src={item.photos[0]?.url}
+                              />
+                            )
+                          }
+                          actions={[
+                            <div>
+                              <LikeOutlined
+                                key="setting"
+                                style={{ marginRight: 8 }}
+                              />
+                              {item.count.like_cnt}
+                            </div>,
+                            <div>
+                              <CommentOutlined
+                                key="edit"
+                                style={{ marginRight: 8 }}
+                              />
+                              {item.count.comment_cnt}
+                            </div>,
+                          ]}
+                        >
+                          <Meta
+                            avatar={<Avatar src={item.profile_image} />}
+                            title={item.title_name}
+                            description={item.reg_date}
+                          />
+                        </Card>
+                      </a>
+                    );
+                  })}
+              </Masonry>
+            </ResponsiveMasonry>
           </div>
           <div
             style={{
