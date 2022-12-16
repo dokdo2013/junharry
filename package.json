@@ -23,7 +23,7 @@
     "react-iframe": "1.8.5",
     "react-responsive": "9.0.2",
     "react-responsive-masonry": "^2.1.6",
-    "react-router-dom": "6.4.5",
+    "react-router-dom": "6.5.0",
     "react-scripts": "5.0.1",
     "web-vitals": "2.1.4"
   },
