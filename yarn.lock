@@ -3490,10 +3490,10 @@ ajv@^8.0.0, ajv@^8.6.0, ajv@^8.8.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-amplitude-js@8.21.4:
-  version "8.21.4"
-  resolved "https://registry.npmjs.org/amplitude-js/-/amplitude-js-8.21.4.tgz"
-  integrity sha512-XeWwwqaA4wvWh52Mc2yzfofJATy9biyCFpmPQttOM5iGN0NujjTESyEcV+XN4ud0Q67mnAA4tfjTfhYjXSTHEg==
+amplitude-js@8.21.5:
+  version "8.21.5"
+  resolved "https://registry.npmjs.org/amplitude-js/-/amplitude-js-8.21.5.tgz"
+  integrity sha512-Y6s13jBHj79gZtcvoOXCyX2f5VTUeVJQDAzlYfnsKzr622SWvUUVFAWoCJCJUKsyTH0NkYQw+/lXPkh8iyt2Iw==
   dependencies:
     "@amplitude/analytics-connector" "^1.4.6"
     "@amplitude/ua-parser-js" "0.7.31"
