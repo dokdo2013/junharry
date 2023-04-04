@@ -24,6 +24,11 @@
   resolved "https://registry.npmjs.org/@amplitude/ua-parser-js/-/ua-parser-js-0.7.31.tgz"
   integrity sha512-+z8UGRaj13Pt5NDzOnkTBy49HE2CX64jeL0ArB86HAtilpnfkPB7oqkigN7Lf2LxscMg4QhFD7mmCfedh3rqTg==
 
+"@amplitude/ua-parser-js@0.7.33":
+  version "0.7.33"
+  resolved "https://registry.npmjs.org/@amplitude/ua-parser-js/-/ua-parser-js-0.7.33.tgz"
+  integrity sha512-wKEtVR4vXuPT9cVEIJkYWnlF++Gx3BdLatPBM+SZ1ztVIvnhdGBZR/mn9x/PzyrMcRlZmyi6L56I2J3doVBnjA==
+
 "@amplitude/utils@^1.10.2":
   version "1.10.2"
   resolved "https://registry.npmjs.org/@amplitude/utils/-/utils-1.10.2.tgz"
@@ -3489,13 +3494,13 @@ ajv@^8.0.0, ajv@^8.6.0, ajv@^8.8.0:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-amplitude-js@8.21.7:
-  version "8.21.7"
-  resolved "https://registry.npmjs.org/amplitude-js/-/amplitude-js-8.21.7.tgz"
-  integrity sha512-qciiLxH1vR1+46DNzDLGQhtaS1fSAuv7WH73S+prYTiaUm1fuze+pVGl7hLdVBu7Tchi1RKfYxsqa2c9p/dfxQ==
+amplitude-js@8.21.8:
+  version "8.21.8"
+  resolved "https://registry.npmjs.org/amplitude-js/-/amplitude-js-8.21.8.tgz"
+  integrity sha512-fiURS2KONUk8vzDiUiz8QGQhvTelgghSmLGMNSsWtU28+DB0YeornwkK5h8aiN9t7o9IdTn2UrurQIyOSk2nGA==
   dependencies:
     "@amplitude/analytics-connector" "^1.4.6"
-    "@amplitude/ua-parser-js" "0.7.31"
+    "@amplitude/ua-parser-js" "0.7.33"
     "@amplitude/utils" "^1.10.2"
     "@babel/runtime" "^7.21.0"
     blueimp-md5 "^2.19.0"
