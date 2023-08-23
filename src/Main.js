@@ -307,7 +307,7 @@ export default function Main() {
                   <img
                     height={18}
                     style={{ filter: "grayscale(100%)" }}
-                    src="https://obj-sg.thewiki.kr/data/ec9584ed9484eba6acecb9b4545620ec9584ec9db4ecbd982e706e67.png"
+                    src="https://res.afreecatv.com/afreeca.ico"
                     alt="AfreecaTV"
                   />
                 }
@@ -328,7 +328,7 @@ export default function Main() {
                 }}
               ></Button>
             </Tooltip> */}
-            <Tooltip title="유튜브">
+            {/* <Tooltip title="유튜브">
               <Button
                 className="flex-center"
                 shape="circle"
@@ -351,7 +351,7 @@ export default function Main() {
                   window.open("https://www.instagram.com/junharry_/");
                 }}
               ></Button>
-            </Tooltip>
+            </Tooltip> */}
             {/* <Tooltip title="디스코드">
               <Button
                 className="flex-center"
