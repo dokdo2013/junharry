@@ -14,7 +14,7 @@
     "@tinymce/tinymce-react": "4.3.0",
     "amplitude-js": "8.21.9",
     "antd": "4.24.14",
-    "axios": "1.5.0",
+    "axios": "1.5.1",
     "framer-motion": "6.5.1",
     "moment": "2.29.4",
     "react": "18.2.0",
