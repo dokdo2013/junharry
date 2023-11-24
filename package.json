@@ -11,7 +11,7 @@
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "13.5.0",
-    "@tinymce/tinymce-react": "4.3.0",
+    "@tinymce/tinymce-react": "4.3.2",
     "amplitude-js": "8.21.9",
     "antd": "4.24.14",
     "axios": "1.5.1",
